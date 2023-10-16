@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/10.5.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.5.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.5.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.5.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.5.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/10.5.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/10.5.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/10.5.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/10.5.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/10.5.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    </div>
+    <p id="load">Firebase SDK Loading&hellip;</p>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+          analytics = app.analytics();
+          
+          console.log("ttttttttt")
+          // messaging
+          messaging = app.messaging();
+          const vapidKey = 'BPcAOx9D58yJ_2N4VV1ISgjw79fyVr2PSwGJ6qONV-5NBoY_oujXuCsNCpPB28ML3_itCVzIZ0Vm9u6RWIFaHGo'
+          messaging.getToken(messaging, { vapidKey: vapidKey }).then((currentToken) => {
+            if (currentToken) {
+              // 取得 currentToken，需傳回 server
+              console.log('get currentToken');
+              console.log(currentToken);
+            } else {
+              console.log('No registration token available. Request permission to generate one.');
+            }
+          }).catch((err) => {
+            console.log('An error occurred while retrieving token. ', err);
+          });
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+    
+    <iframe src="https://showroom.one-stage.kkstream.io/embed?token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3N2RhODVjLTllZjgtNTVjYS05M2FkLTAyYTMyZjkwZjg2MyIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV9pZCI6IjZmYzk5YmI5LWY4OTUtNDhhMy04NzhiLTVmZmY1YjE3ZmFhNyIsInJlc291cmNlX3R5cGUiOiJSRVNPVVJDRV9UWVBFX1ZPRF9FVkVOVCJ9.kWzCg-yyKEw56PTCAXxHnrFCZeOZzDitGsxjGDjDppwROesLIME-jwb1mwEds9axTpKbT9bvL2gJ_ybcKnZuDTAOHxw-nMtSmBHjdEsLbiLsfhSsx2uyeSefdmGPCFOVSCJj4Dn0x6Xj4_NNdE08O1SZz34TbbEQPrK-befzt5JUDv5Aet-suuVVtjeC5NOKkZSB3RA_EPOhLjJmeK_aJBIlbuhVXj_ZDu7jwTjaY8kvsxnWYVMfEfy7tXRBzv21kkOVPaFPLPlaX5dvrcNHNyXMof2sfWKPhKzzxYRSl0_SxYZaALtwOllzwN7D8AC7YAgE2fnMYi75tVQn5dTv4jdEr6OPYUs3XsxCsFqHvUor3ouUuVMXPjtQQOticyZ-l8aqtCVSM5IDg-U4bdGX83Gw2JGSTrA7MumR73Y4IXacNjmP6ugmUeq624w5GsuCb7lBdS-QxVyhR9Xh4IJryUX_1BvNuezhMfXQood9XBhc1CfvO_1mhaFsvod5ywbyH5kwmmasi78cA3Ga0qvYJ2RstghR62CEBqgeJQcsd29b3xHljatxD580UPu13VvP_RO6k42U3bMhNwed--fdhIH2h8rfKBgn7LaET3HYO9gx1FCtj3fHSucmp4ofWpgwtqxKbAdlsWSmP9fWs8wyDsj-zTyJa2BY_Ou8IILKwlk" width="640" height="360" allow="autoplay; encrypted-media; clipboard-write" frameborder="0" allowfullscreen></iframe>
+    
+    <script type="module">
+      let url = 'https://api.one.blendvision.com/bv/account/v1/accounts/login';
+      let options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: '{"email":"ray5233512@gmail.com","password":"Ray711blendvision@"}'
+      };
+
+      try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+
+      url = 'https://api.one.blendvision.com/bv/account/v1/accounts/api-tokens';
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          authorization: '123'
+        },
+        body: '{"expired_date":"2023-10-15T00:00:00.320Z","name":"test"}'
+      };
+
+      try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+
+      console.log('token');
+      console.log(data)
+      url = 'https://api.one.blendvision.com/bv/cms/v1/vods';
+      options = {
+        method: 'GET',
+        headers: {'x-bv-org-id': 'e28bfe29-6bd1-425d-ad31-60b59ecd2028', Accept: 'application/json', authorization: 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3N2RhODVjLTllZjgtNTVjYS05M2FkLTAyYTMyZjkwZjg2MyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpdCIsInN1YiI6IjA5OWNjMzc2LWZhMjUtNDk0Yi05ODY2LThkZWUwMDRhNmVkMCIsImp0aSI6ImQ1YjVjMTc3LTBkYzgtNDc2My05MzFhLTBmNWFhYzkxMDY4OSIsInRva2VuX3VzZSI6ImFwaV9hY2Nlc3MiLCJlbWFpbCI6InJheTUyMzM1MTJAZ21haWwuY29tIn0.psZfGjgLtN1LH2_ccbL3y1oiB5flojUswizs7kqYWvA_nomVJGC7FI6KbaC4FUr8Pv_pf6oUNyRggAkI2dCVOUq1qfvuEFT9PJNJzebHyjHl_A4V4V7bg-mw_su2UXflhYgLNAIqeJmNE9X98IBERWXJmzK8psuTfvMTcehg_8am6gafNVxIvmaRpFR2QQFVkO-FDOHVzevJbcnze6GzdPcVQJ2OXbu6EyYA3a9-ita8FIlSb0WIwaFuOQ9Mh-uT4gpvGzZQR1C7700zMJojq3pbrNeLNq2pOUH062GMSdB26ibqht8PTY3-xfJpoGLFpJUcLByvp9v5PwbVoLzb1-b6ceKS1y6IYMuVZTEYRRPx4g01SCpfMYojaGejKt7zk4kQS22TOem12JPmCPG4b9p0snUmBQLkwsTrg8bznF6kZB0sIYtnU_8JllWN6n2JoZezWK0-4gVHKcxMdICDm5vv_K8h8L-HPffAfPrT1rDpWcGSXqJ7S1cgd0utZxnnCzsSx2VZdxxoXu_ZrCtQSZX_cBkU1oMHpJZeQuiBN1C6gAXcuSZoy-t_8yW9XMOkGIpcLkkohHb4LpAKP_5p8KFN7wW0XDFNlSmCjMW-np2sB9NnXWvlVNtPNbYQQhbdNYzzw0VT4GcZchpR5J4AmoqVNBEhqJ4L0R4CrJPyyAE'}
+      };
+
+      try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+      console.log(data);
+      console.log(typeof data);
+    </script>
+    <script>
+      window.addEventListener('message', event => {
+        if (event.data.command === 'ping') {
+          Array.from(document.querySelectorAll('iframe')).forEach(iframe => 
+            iframe?.contentWindow?.postMessage({ command: 'pong' }, '*')
+          );
+        }
+      });
+    </script>
+    
+  </body>
+</html>
